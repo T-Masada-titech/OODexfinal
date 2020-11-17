@@ -1,7 +1,7 @@
 package activity;
 
-public class CancelActivity {
+public class CancelActivity extends Activity {
 	public void doActivity() {
-		System.out.println("do cancel");
+		System.out.println("予約キャンセル処理が完了しました\n");
 	}
 }

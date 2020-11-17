@@ -1,8 +1,9 @@
 package activity;
 
 
-public class ArrivalActivity {
+public class ArrivalActivity extends Activity {
 	public void doActivity() {
-		System.out.println("do arrival");
+		/* 処理 */
+		System.out.println("入荷処理が完了しました\n");
 	}
 }

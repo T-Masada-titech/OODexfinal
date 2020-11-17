@@ -1,7 +1,7 @@
 package activity;
 
-public class ReservationActivity {
+public class ReservationActivity extends Activity {
 	public void doActivity() {
-		System.out.println("do reservation");
+		System.out.println("予約作成処理が完了しました\n");
 	}
 }
