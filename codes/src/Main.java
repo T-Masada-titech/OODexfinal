@@ -1,7 +1,9 @@
-package activity;
+
 import java.util.Scanner;
 
-public class MainActivity {
+import activity.Activity;
+
+public class Main {
 	public static void main(String args[]) {
 		Activity activity;
 		Scanner scan = new Scanner(System.in);
