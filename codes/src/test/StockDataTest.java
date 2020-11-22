@@ -18,5 +18,8 @@ public class StockDataTest extends TestCase {
 		assertFalse(sd.addStock(js,  1));  //add OK
 		assertEquals(sd.sizeOfKind(js), 10);
 		assertEquals(sd.sizeOfKind(w), 0);  // sizeOfKind OK
+		sd.removeStock(js,  3);
+		sd.addStock(w, 3);
+		sd.printAllStock();
 	}
 }

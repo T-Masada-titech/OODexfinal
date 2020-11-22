@@ -25,9 +25,12 @@ public class StockData {
 			return false;
 		}
 		for(int n = 0; n < num; n++) {
-			int i;
-			for(i = 0; !data.get(i).kind().equals(kind); i++);
-			data.remove(i);
+			for(Stock s: data) {
+				if(s.kind().equals(kind)) {
+					data.remove(s);
+					break;
+				}
+			}
 		}
 		return true;
 	}
@@ -42,5 +45,29 @@ public class StockData {
 			if(s.kind().equals(kind)) size++;
 		}
 		return size;
+	}
+
+	public void printAllStock() {
+		ArrayList<String> stock = new ArrayList<String>();
+		ArrayList<Integer> sum = new ArrayList<Integer>();
+		for(Stock s:data) {
+			if(stock.contains(s.kind())) {
+				int i;
+				for(i = 0; i < stock.size(); i++) {
+					if(stock.get(i).equals(s.kind())) {
+						break;
+					}
+				}
+				sum.set(i, sum.get(i) + 1);
+
+			} else {
+				stock.add(s.kind());
+				sum.add(1);
+			}
+		}
+		System.out.println("在庫一覧");
+		for(int i = 0; i < stock.size(); i++) {
+			System.out.println(stock.get(i) + " : " + sum.get(i));
+		}
 	}
 }
