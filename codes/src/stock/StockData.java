@@ -3,13 +3,15 @@ import java.util.ArrayList;
 
 public class StockData {
 	private ArrayList<Stock> data;
-	public StockData() {
+	private int maxSize; //在庫の最大数
+	public StockData(int size) {
 		data = new ArrayList<Stock>();
+		maxSize = size;
 	}
-	private final int MAX_STOCK = 1000; //在庫の最大数
+
 
 	public boolean addStock(String kind, int num) {
-		if(num + data.size() > MAX_STOCK) {
+		if(num + data.size() > maxSize) {
 			return false;
 		}
 		for(int n = 0; n < num; n++) {
@@ -23,9 +25,9 @@ public class StockData {
 			return false;
 		}
 		for(int n = 0; n < num; n++) {
-			for(int i = 0; !data.get(i).kind().equals(kind); i++) {
-				data.remove(i);
-			}
+			int i;
+			for(i = 0; !data.get(i).kind().equals(kind); i++);
+			data.remove(i);
 		}
 		return true;
 	}
@@ -34,7 +36,7 @@ public class StockData {
 		return data.size();
 	}
 
-	private int sizeOfKind(String kind) {
+	public int sizeOfKind(String kind) {
 		int size = 0;
 		for(Stock s: data) {
 			if(s.kind().equals(kind)) size++;
