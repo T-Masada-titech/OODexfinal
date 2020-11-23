@@ -24,7 +24,7 @@ public class Main {
 			if(act.equals("e")) {
 				doNext = false;
 			} else {
-				activity = Activity.createActivity(act);
+				activity = Activity.createActivity(act, stockData, reservationData);
 				activity.doActivity();
 			}
 		}

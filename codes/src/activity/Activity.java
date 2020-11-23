@@ -1,7 +1,9 @@
 package activity;
+import data.ReservationData;
+import data.StockData;
 
 public class Activity {
-	public static Activity createActivity(String act) {
+	public static Activity createActivity(String act, StockData sd, ReservationData rd) {
 		switch(act) {
 		case "a":
 			System.out.println("入荷処理を開始します");
