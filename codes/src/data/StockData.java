@@ -9,10 +9,17 @@ public class StockData {
 		maxSize = size;
 	}
 
+	public boolean checkAbleAdd(int num) {
+		return num + data.size() <= maxSize;
+	}
+
+	public boolean checkAbleRemove(String kind, int num) {
+		return sizeOfKind(kind) - num >= 0;
+	}
 
 	public boolean addStock(String kind, int num) {
-		if(num + data.size() > maxSize) {
-			return false;
+		if(!checkAbleAdd(num)) {
+			return false;     //check they can add stocks
 		}
 		for(int n = 0; n < num; n++) {
 			data.add(new Stock(kind));
@@ -21,8 +28,8 @@ public class StockData {
 	}
 
 	public boolean removeStock(String kind, int num) {
-		if(sizeOfKind(kind) - num < 0) {
-			return false;
+		if(!checkAbleRemove(kind, num)) {
+			return false;  // check they can remove stocks
 		}
 		for(int n = 0; n < num; n++) {
 			for(Stock s: data) {

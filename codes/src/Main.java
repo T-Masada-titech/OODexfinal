@@ -12,8 +12,8 @@ public class Main {
 	public static StockData stockData = new StockData(MAX_STOCK_SIZE);
 
 	public static void main(String args[]) {
-		Activity activity;
 		Scanner scan = new Scanner(System.in);
+		Activity activity;
 		boolean doNext = true;
 		String act;
 		while(doNext) {
@@ -24,7 +24,7 @@ public class Main {
 			if(act.equals("e")) {
 				doNext = false;
 			} else {
-				activity = Activity.createActivity(act, stockData, reservationData);
+				activity = Activity.createActivity(act, scan, stockData, reservationData);
 				activity.doActivity();
 			}
 		}

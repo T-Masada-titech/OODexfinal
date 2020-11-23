@@ -1,16 +1,102 @@
 package activity;
+import java.util.Map;
 import java.util.Scanner;
+
+import data.Contents;
+import data.ReservationData;
+import data.Stock;
+import data.StockData;
 public class OrderActivity extends Activity {
+	public OrderActivity(Scanner scan, StockData sd, ReservationData rd) {
+		this.scan = scan;
+		this.sd = sd;
+		this.rd = rd;
+	}
 	public void doActivity() {
-		Scanner scan = new Scanner(System.in);
-		System.out.println("注文内容を入力してください\n"
-				+ "種類はなんですか？\n"
-				+ "日本酒：j, ワイン：w");
-		String sake = scan.next();
-		System.out.println("数を入力してください");
-		int num = scan.nextInt();
+		Contents order = takeOrder();
+		if(order.isEmpty()) {
+			System.out.println("注文処理を終了します");
+			return;
+		}
+		if(checkAbleShipment(order)) {
+			checkAndDoShipmentProcess(order);
+		} else {
+			checkAndDoReservationProcess(order);
+		}
+	}
 
+	private Contents takeOrder() {
+		Contents order = new Contents();
+		Scanner scan =  new Scanner(System.in);
+		while(checkContinue(scan)) {
+			System.out.println("注文内容を入力してください");
+			sd.printAllStock();
+			System.out.println("種類はなんですか？");
+			String sake = scan.next();
+			sake = sake.toLowerCase();
+			System.out.println("数を入力してください");
+			int num;
+			while((num = scan.nextInt()) <= 0) {
+				System.out.println("正しい値を入力してください");
+			}
+			order.put(new Stock(sake), num);
+		}
+		return order;
+	}
 
-		scan.close();
+	private boolean checkContinue(Scanner scan) {
+		boolean isContinue = false;
+		boolean flag = true;
+		while(flag) {
+			System.out.println("注文はまだありますか？  ある：y, ない：n");
+			switch(scan.next()) {
+				case "y":
+					isContinue = true;
+					flag = false;
+					break;
+				case "n":
+					isContinue = false;
+					flag = false;
+					break;
+				default:
+					System.out.println("正しい入力を行ってください");
+			}
+		}
+		return isContinue;
+	}
+
+	private boolean checkAbleShipment(Contents order) {
+		boolean isAble = false;
+		for(Map.Entry<Stock, Integer> e : order.entrySet()) {
+			isAble = sd.checkAbleRemove(e.getKey().kind(), e.getValue().intValue());
+		}
+
+		if(isAble) {
+			System.out.println("販売可能です");
+			return true;
+		} else {
+			System.out.println("在庫がありません");
+			return false;
+		}
+	}
+
+	private void checkAndDoShipmentProcess(Contents order) {
+		System.out.println("出荷処理を実行しますか？  実行する：y, 実行しない：else");
+		if(scan.next().equals("y")) {
+			ShipmentActivity sa = new ShipmentActivity(scan, sd, rd);
+			sa.doActivityFromOrder(order);
+		} else {
+			System.out.println("出荷処理を中断しました");
+		}
+	}
+
+	private void checkAndDoReservationProcess(Contents order) {
+		System.out.println("予約処理を実行しますか？  実行する：y, 実行しない：else");
+		if(scan.next().equals("y")) {
+			ReservationActivity ra = new ReservationActivity(scan, sd, rd);
+			ra.doActivityFromOrder(order);
+		} else {
+			System.out.println("予約処理を中断しました");
+		}
 	}
 }

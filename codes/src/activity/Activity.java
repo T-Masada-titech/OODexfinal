@@ -1,23 +1,34 @@
 package activity;
+import java.util.Scanner;
+
 import data.ReservationData;
 import data.StockData;
 
 public class Activity {
-	public static Activity createActivity(String act, StockData sd, ReservationData rd) {
+	protected Scanner scan;
+	protected StockData sd;
+	protected ReservationData rd;
+	public static final String STR_ARRIVE = "a";
+	public static final String STR_ORDER = "o";
+	public static final String STR_SHIPMENT = "s";
+	public static final String STR_RESERVATION = "r";
+	public static final String STR_CANCEL = "c";
+
+	public static Activity createActivity(String act, Scanner scan, StockData sd, ReservationData rd) {
 		switch(act) {
-		case "a":
+		case STR_ARRIVE:
 			System.out.println("入荷処理を開始します");
 			return new ArrivalActivity();
-		case "o":
+		case STR_ORDER:
 			System.out.println("注文処理を開始します");
-			return new OrderActivity();
-		case "s":
+			return new OrderActivity(scan, sd, rd);
+		case STR_SHIPMENT:
 			System.out.println("出荷処理を開始します");
-			return new ShipmentActivity();
-		case "r":
+			return new ShipmentActivity(scan, sd, rd);
+		case STR_RESERVATION:
 			System.out.println("予約作成処理を開始します");
-			return new ReservationActivity();
-		case "c":
+			return new ReservationActivity(scan, sd, rd);
+		case STR_CANCEL:
 			System.out.println("予約キャンセル処理を開始します");
 			return new CancelActivity();
 		default:

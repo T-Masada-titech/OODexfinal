@@ -1,6 +1,4 @@
 package data;
-import java.util.Map;
-
 
 public class Reservation implements Comparable<Reservation>{
 	private int id;
@@ -19,11 +17,7 @@ public class Reservation implements Comparable<Reservation>{
 	}
 
 	public Contents getContents() {
-		Contents newc = new Contents();
-		for(Map.Entry<Stock, Integer> e : contents.entrySet()) {
-			newc.put(e.getKey(), e.getValue());
-		}
-		return newc;
+		return contents;
 	}
 
 

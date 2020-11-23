@@ -1,6 +1,7 @@
 package data;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 
 public class ReservationData {
 	private ArrayList<Reservation> data;
@@ -64,11 +65,9 @@ public class ReservationData {
 			System.out.println(r.getID() + " | " + r.getClientName()
 			           + " | " + r.getCallNumber());
 			Contents c = r.getContents();
-			while(!c.isEmpty()) {
-				Stock stock = c.firstKey();
-				String kind = stock.kind();
-				Integer sum = c.get(stock);
-				c.remove(stock);
+			for(Map.Entry<Stock, Integer> e : c.entrySet()) {
+				String kind = e.getKey().kind();
+				Integer sum = e.getValue();
 				System.out.println(kind + " : " + sum);
 			}
 		}
