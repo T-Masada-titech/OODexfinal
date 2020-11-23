@@ -1,4 +1,4 @@
-package stock;
+package data;
 import java.util.ArrayList;
 
 public class StockData {
@@ -48,26 +48,22 @@ public class StockData {
 	}
 
 	public void printAllStock() {
-		ArrayList<String> stock = new ArrayList<String>();
-		ArrayList<Integer> sum = new ArrayList<Integer>();
+		Contents stocks = new Contents();
 		for(Stock s:data) {
-			if(stock.contains(s.kind())) {
-				int i;
-				for(i = 0; i < stock.size(); i++) {
-					if(stock.get(i).equals(s.kind())) {
-						break;
-					}
-				}
-				sum.set(i, sum.get(i) + 1);
-
+			if(stocks.containsKey(s)) {
+				Integer sum = stocks.get(s);
+				stocks.replace(s, sum + 1);
 			} else {
-				stock.add(s.kind());
-				sum.add(1);
+				stocks.put(s, 1);
 			}
 		}
 		System.out.println("在庫一覧");
-		for(int i = 0; i < stock.size(); i++) {
-			System.out.println(stock.get(i) + " : " + sum.get(i));
+		while(!stocks.isEmpty()) {
+			Stock stock = stocks.firstKey();
+			String kind = stock.kind();
+			Integer sum = stocks.get(stock);
+			stocks.remove(stock);
+			System.out.println(kind + " : " + sum);
 		}
 	}
 }

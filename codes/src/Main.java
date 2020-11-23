@@ -2,12 +2,13 @@
 import java.util.Scanner;
 
 import activity.Activity;
-import reservation.ReservationData;
-import stock.StockData;
+import data.ReservationData;
+import data.StockData;
 
 public class Main {
 	public static final int MAX_STOCK_SIZE = 100;
-	public static ReservationData reservationData = new ReservationData();
+	public static final int MAX_RESERVATION_SIZE = 10;
+	public static ReservationData reservationData = new ReservationData(MAX_RESERVATION_SIZE);
 	public static StockData stockData = new StockData(MAX_STOCK_SIZE);
 
 	public static void main(String args[]) {

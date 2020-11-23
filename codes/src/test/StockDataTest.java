@@ -1,7 +1,7 @@
 package test;
 
+import data.StockData;
 import junit.framework.TestCase;
-import stock.StockData;
 public class StockDataTest extends TestCase {
 	public void testStockDataTest() {
 		String js = "Japanese Sake";
@@ -21,5 +21,6 @@ public class StockDataTest extends TestCase {
 		sd.removeStock(js,  3);
 		sd.addStock(w, 3);
 		sd.printAllStock();
+		sd.printAllStock(); // check deep copy
 	}
 }
