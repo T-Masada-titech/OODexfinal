@@ -1,7 +1,6 @@
 package data;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Map;
 
 public class ReservationData {
 	private ArrayList<Reservation> data;
@@ -11,11 +10,11 @@ public class ReservationData {
 		maxSize = size;
 	}
 
-	public boolean addReservation(int id, String name, String callNumber, Contents contents) {
+	public boolean addReservation(int id, String name, String callNumber,String date, Contents contents) {
 		if(id == -1) {
 			return false;
 		}
-		data.add(new Reservation(id, name, callNumber, contents));
+		data.add(new Reservation(id, name, callNumber,date, contents));
 		return true;
 	}
 
@@ -29,6 +28,15 @@ public class ReservationData {
 			}
 		}
 		return isRemoved;
+	}
+
+	public Reservation getReservation(int id) {
+		for(Reservation r : data) {
+			if(r.getID() == id) {
+				return r;
+			}
+		}
+		return null;
 	}
 
 	public int createReservationID() {
@@ -61,15 +69,7 @@ public class ReservationData {
 		Collections.sort(data);
 		System.out.println("予約一覧");
 		for(int i = 0; i < data.size(); i++) {
-			Reservation r = data.get(i);
-			System.out.println(r.getID() + " | " + r.getClientName()
-			           + " | " + r.getCallNumber());
-			Contents c = r.getContents();
-			for(Map.Entry<Stock, Integer> e : c.entrySet()) {
-				String kind = e.getKey().kind();
-				Integer sum = e.getValue();
-				System.out.println(kind + " : " + sum);
-			}
+			System.out.println(data.get(i));
 		}
 	}
 }

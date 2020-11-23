@@ -18,7 +18,7 @@ public class Activity {
 		switch(act) {
 		case STR_ARRIVE:
 			System.out.println("入荷処理を開始します");
-			return new ArrivalActivity();
+			return new ArrivalActivity(scan, sd, rd);
 		case STR_ORDER:
 			System.out.println("注文処理を開始します");
 			return new OrderActivity(scan, sd, rd);
@@ -30,7 +30,7 @@ public class Activity {
 			return new ReservationActivity(scan, sd, rd);
 		case STR_CANCEL:
 			System.out.println("予約キャンセル処理を開始します");
-			return new CancelActivity();
+			return new CancelActivity(scan, sd, rd);
 		default:
 			return new DefaultActivity();
 		}

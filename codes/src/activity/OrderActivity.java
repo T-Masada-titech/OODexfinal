@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import data.Contents;
 import data.ReservationData;
-import data.Stock;
 import data.StockData;
 public class OrderActivity extends Activity {
 	public OrderActivity(Scanner scan, StockData sd, ReservationData rd) {
@@ -39,7 +38,7 @@ public class OrderActivity extends Activity {
 			while((num = scan.nextInt()) <= 0) {
 				System.out.println("正しい値を入力してください");
 			}
-			order.put(new Stock(sake), num);
+			order.put(sake, num);
 		}
 		return order;
 	}
@@ -67,8 +66,8 @@ public class OrderActivity extends Activity {
 
 	private boolean checkAbleShipment(Contents order) {
 		boolean isAble = false;
-		for(Map.Entry<Stock, Integer> e : order.entrySet()) {
-			isAble = sd.checkAbleRemove(e.getKey().kind(), e.getValue().intValue());
+		for(Map.Entry<String, Integer> e : order.entrySet()) {
+			isAble = sd.checkAbleRemove(e.getKey(), e.getValue().intValue());
 		}
 
 		if(isAble) {
@@ -83,6 +82,7 @@ public class OrderActivity extends Activity {
 	private void checkAndDoShipmentProcess(Contents order) {
 		System.out.println("出荷処理を実行しますか？  実行する：y, 実行しない：else");
 		if(scan.next().equals("y")) {
+			System.out.println("出荷処理に移行します");
 			ShipmentActivity sa = new ShipmentActivity(scan, sd, rd);
 			sa.doActivityFromOrder(order);
 		} else {
@@ -93,6 +93,7 @@ public class OrderActivity extends Activity {
 	private void checkAndDoReservationProcess(Contents order) {
 		System.out.println("予約処理を実行しますか？  実行する：y, 実行しない：else");
 		if(scan.next().equals("y")) {
+			System.out.println("予約処理に移行します");
 			ReservationActivity ra = new ReservationActivity(scan, sd, rd);
 			ra.doActivityFromOrder(order);
 		} else {
