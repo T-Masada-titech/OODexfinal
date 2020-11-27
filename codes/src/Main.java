@@ -12,9 +12,9 @@ public class Main {
 	public static StockData stockData = new StockData(MAX_STOCK_SIZE);
 
 	public static void main(String args[]) {
-		stockData.addStock("japanese sake", 10);
+		stockData.addStock("nihonshu", 10);
 		stockData.addStock("wine", 10);
-		stockData.setPrice("japanese sake", 2500);
+		stockData.setPrice("nihonshu", 2500);
 		stockData.setPrice("wine", 2000);
 		Scanner scan = new Scanner(System.in);
 		Activity activity;

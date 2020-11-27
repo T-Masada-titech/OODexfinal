@@ -39,8 +39,23 @@ public class ReservationData {
 		return null;
 	}
 
-	public int createReservationID() {
+	public boolean isFull() {
 		if(data.size() == maxSize) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isEmpty() {
+		if(data.size() == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public int createReservationID() {
+		if(isFull()) {
 			return -1; // error : reservation is full
 		}
 		int id = -1;

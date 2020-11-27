@@ -33,6 +33,10 @@ public class OrderActivity extends Activity {
 			System.out.println("種類はなんですか？");
 			String sake = scan.next();
 			sake = sake.toLowerCase();
+			if(!sd.isExist(sake)) {
+				System.out.println("正しい種類を入力してください");
+				continue;
+			}
 			System.out.println("数を入力してください");
 			int num;
 			while((num = scan.nextInt()) <= 0) {
@@ -45,21 +49,14 @@ public class OrderActivity extends Activity {
 
 	private boolean checkContinue(Scanner scan) {
 		boolean isContinue = false;
-		boolean flag = true;
-		while(flag) {
-			System.out.println("注文はまだありますか？  ある：y, ない：n");
-			switch(scan.next()) {
-				case "y":
-					isContinue = true;
-					flag = false;
-					break;
-				case "n":
-					isContinue = false;
-					flag = false;
-					break;
-				default:
-					System.out.println("正しい入力を行ってください");
-			}
+		System.out.println("注文はまだありますか？  ある：y, ない：else");
+		switch(scan.next()) {
+			case "y":
+				isContinue = true;
+				break;
+			default:
+				isContinue = false;
+
 		}
 		return isContinue;
 	}

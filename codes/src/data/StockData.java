@@ -125,18 +125,13 @@ public class StockData {
 		}
 		return true;
 	}
-/*
-	public boolean moveToReservationData(Contents order) {
-		for(Map.Entry<String, Integer> e: order.entrySet()) {
-			if(!checkAbleRemove(e.getKey(), e.getValue())) {
-				return false;
+
+	public boolean isExist(String kind) {
+		for(Stock s: data) {
+			if(s.kind().equals(kind)) {
+				return true;
 			}
 		}
-		for(Map.Entry<String, Integer> e : order.entrySet()) {
-			removeStock(e.getKey(), e.getValue());
-			dataForReservation.add(new Stock(e.getKey()));
-		}
-		return true;
+		return false;
 	}
-	*/
 }

@@ -41,7 +41,7 @@ public class Reservation implements Comparable<Reservation>{
 	}
 
 	public String toString() {
-		String out =  getID() + " | " + getClientName() + " | "
+		String out =  "\n" + getID() + " | " + getClientName() + " | "
 				+ getCallNumber() + " | " + getDate() + "\n";
 		for(Map.Entry<String, Integer> e : getContents().entrySet()) {
 			out = out + e.getKey() + " : " + e.getValue() + "\n";
