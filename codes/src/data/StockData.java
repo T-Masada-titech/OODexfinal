@@ -6,7 +6,7 @@ import java.util.TreeMap;
 public class StockData {
 	private ArrayList<Stock> data;  //在庫データのうち、予約でないもの
 	private ArrayList<Stock> dataForReservation;  //在庫データのうち、予約分
-	private TreeMap<String, Integer> priceList = new TreeMap<>();
+	private TreeMap<String, Integer> priceList = new TreeMap<>(); //種類ごとの値段を保存
 	private int maxSize; //在庫の最大数
 	public StockData(int size) {
 		data = new ArrayList<Stock>();
@@ -51,7 +51,7 @@ public class StockData {
 		return data.size() + dataForReservation.size();
 	}
 
-	public int sizeOfKind(String kind) {
+	public int sizeOfKind(String kind) { //販売用のデータの中でのkindの数を返す
 		int size = 0;
 		for(Stock s: data) {
 			if(s.kind().equals(kind)) size++;
@@ -59,7 +59,7 @@ public class StockData {
 		return size;
 	}
 
-	public void printAllStock() {
+	public void printAllStock() { //販売用在庫データを出力する
 		Contents stocks = new Contents();
 		for(Stock s:data) {
 			if(stocks.containsKey(s.kind())) {
@@ -90,6 +90,16 @@ public class StockData {
 		return priceList.get(kind);
 	}
 
+	public boolean addDataForReservation(String kind, int num) {
+		if(!checkAbleAdd(num)) {
+			return false;     //check they can add stocks
+		}
+		for(int n = 0; n < num; n++) {
+			dataForReservation.add(new Stock(kind));
+		}
+		return true;
+	}
+
 	public boolean removeDataForReservation(Contents order) {
 		for(Map.Entry<String, Integer> e : order.entrySet()) {
 			int sum = 0;
@@ -107,9 +117,11 @@ public class StockData {
 				for(Stock s : dataForReservation) {
 					if(s.kind().equals(e.getKey())) {
 						dataForReservation.remove(s);
+						break;
 					}
 				}
 			}
+
 		}
 		return true;
 	}

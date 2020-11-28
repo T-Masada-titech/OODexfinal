@@ -1,6 +1,7 @@
 package data;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 
 public class ReservationData {
 	private ArrayList<Reservation> data;
@@ -86,5 +87,21 @@ public class ReservationData {
 		for(int i = 0; i < data.size(); i++) {
 			System.out.println(data.get(i));
 		}
+	}
+
+	public Contents getReservationContentsFromDate(String date) {
+		Contents contents = new Contents();
+		for(Reservation r : data) {
+			if(r.getDate().equals(date)) {
+				for(Map.Entry<String, Integer> e : r.getContents().entrySet()) {
+					if(contents.containsKey(e.getKey())) {
+						contents.put(e.getKey(), e.getValue() + contents.get(e.getKey()));
+					} else {
+						contents.put(e.getKey(), e.getValue());
+					}
+				}
+			}
+		}
+		return contents;
 	}
 }
