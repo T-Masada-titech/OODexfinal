@@ -54,6 +54,7 @@ public class ReservationActivity extends Activity {
 			sake = sake.toLowerCase();
 			if(!sd.isExist(sake)) {
 				System.out.println("正しい種類を入力してください");
+				continue;
 			}
 			System.out.println("数を入力してください");
 			int num;

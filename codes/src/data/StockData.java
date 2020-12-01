@@ -73,8 +73,9 @@ public class StockData {
 		while(!stocks.isEmpty()) {
 			String kind = stocks.firstKey();
 			Integer sum = stocks.get(kind);
+			int price = priceList.get(kind);
 			stocks.remove(kind);
-			System.out.println(kind + " : " + sum);
+			System.out.println(kind + " : " + sum + "個 : " + price + "円");
 		}
 	}
 
@@ -146,4 +147,12 @@ public class StockData {
 		}
 		return false;
 	}
+
+	public boolean isNewProduct(String kind) {
+		if(!priceList.containsKey(kind)) {
+			return true;
+		}
+		return false;
+	}
+
 }

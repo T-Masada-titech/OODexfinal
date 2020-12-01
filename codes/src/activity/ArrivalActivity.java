@@ -24,6 +24,7 @@ public class ArrivalActivity extends Activity {
 		//在庫データを増やす
 		for(Map.Entry<String, Integer> e : addStockContents.entrySet()) {
 			sd.addStock(e.getKey(), e.getValue());
+			checkNewAndSetPrice(e.getKey());
 		}
 		for(Map.Entry<String, Integer> e : reservationContents.entrySet()) {
 			sd.addDataForReservation(e.getKey(), e.getValue());
@@ -115,6 +116,14 @@ public class ArrivalActivity extends Activity {
 		}
 		System.out.println(contents);
 		return contents;
+	}
+
+	private void checkNewAndSetPrice(String kind) { //新商品の値段を設定する
+		if(sd.isNewProduct(kind)) {
+			System.out.println("新商品の料金を入力してください");
+			int price = scan.nextInt();
+			sd.setPrice(kind, price);
+		}
 	}
 
 

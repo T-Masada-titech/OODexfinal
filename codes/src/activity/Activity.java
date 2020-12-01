@@ -13,6 +13,7 @@ public class Activity {
 	public static final String STR_SHIPMENT = "s";
 	public static final String STR_RESERVATION = "r";
 	public static final String STR_CANCEL = "c";
+	public static final String STR_PRICECHANGE = "p";
 
 	public static Activity createActivity(String act, Scanner scan, StockData sd, ReservationData rd) {
 		switch(act) {
@@ -31,6 +32,9 @@ public class Activity {
 		case STR_CANCEL:
 			System.out.println("予約キャンセル処理を開始します");
 			return new CancelActivity(scan, sd, rd);
+		case STR_PRICECHANGE:
+			System.out.println("値段変更処理を開始します");
+			return new PriceChangeActivity(scan, sd, rd);
 		default:
 			return new DefaultActivity();
 		}
