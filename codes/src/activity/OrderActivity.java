@@ -62,9 +62,12 @@ public class OrderActivity extends Activity {
 	}
 
 	private boolean checkAbleShipment(Contents order) {
-		boolean isAble = false;
+		boolean isAble = true;
 		for(Map.Entry<String, Integer> e : order.entrySet()) {
 			isAble = sd.checkAbleRemove(e.getKey(), e.getValue().intValue());
+			if(!isAble) {
+				break;
+			}
 		}
 
 		if(isAble) {
