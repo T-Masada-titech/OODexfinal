@@ -128,7 +128,7 @@ public class ArrivalActivity extends Activity {
 
 	private void checkNewAndSetPrice(String kind) { //新商品の値段を設定する
 		if(sd.isNewProduct(kind)) {
-			System.out.println("新商品の料金を入力してください");
+			System.out.println("新商品の料金を入力してください   " + kind  + ":");
 			int price = scan.nextInt();
 			sd.setPrice(kind, price);
 		}
