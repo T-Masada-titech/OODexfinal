@@ -15,7 +15,7 @@ public class PriceChangeActivity extends Activity{
 	public void doActivity() {
 		String kind;
 		while(true) {
-			sd.printAllStock();
+			sd.printPriceList();
 			System.out.println("値段を変更したい商品の商品名を入力してください");
 			kind = scan.next();
 			if(!sd.isNewProduct(kind)) {
@@ -31,6 +31,7 @@ public class PriceChangeActivity extends Activity{
 			return;
 		}
 		sd.setPrice(kind, price);
+		sd.printPriceList();
 		System.out.println("値段変更処理が完了しました\n");
 	}
 }

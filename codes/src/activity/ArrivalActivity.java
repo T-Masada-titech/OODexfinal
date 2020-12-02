@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import data.Contents;
+import data.MyCalendar;
 import data.ReservationData;
 import data.StockData;
 
@@ -17,8 +18,15 @@ public class ArrivalActivity extends Activity {
 		Contents reservationContents = getAndPrintReservationContentsNextDay();
 		Contents arrivalContents = getArrivalContents();
 		Contents addStockContents = getAddStockContents(arrivalContents, reservationContents);
+		if(arrivalContents.isEmpty()) {
+			System.out.println("入荷処理を中断します\n");
+			return;
+		}
+		System.out.println("入荷内容"
+				+ arrivalContents);
 		System.out.println("入荷処理を実行しますか？  実行する：y, 実行しない：else");
 		if(!scan.next().equals("y")) {
+			System.out.println("入荷処理を中断します\n");
 			return;
 		}
 		//在庫データを増やす
@@ -29,15 +37,23 @@ public class ArrivalActivity extends Activity {
 		for(Map.Entry<String, Integer> e : reservationContents.entrySet()) {
 			sd.addDataForReservation(e.getKey(), e.getValue());
 		}
+		sd.printAllStock();
+		sd.printAllReservationStock();
 
 		System.out.println("入荷処理が完了しました\n");
 	}
 
 	private Contents getAndPrintReservationContentsNextDay() {
 		System.out.println("次営業日の日にちを入力してください。");
-		String date = scan.next();
+		System.out.println("年:");
+		int year = scan.nextInt();
+		System.out.println("月:");
+		int month = scan.nextInt();
+		System.out.println("日:");
+		int date = scan.nextInt();
+		MyCalendar cal = new MyCalendar(year, month, date);
 		System.out.println(date + "分の予約の注文内容の総計は");
-		Contents contents = rd.getReservationContentsFromDate(date);
+		Contents contents = rd.getReservationContentsFromDate(cal);
 		System.out.println(contents);
 		return contents;
 	}
@@ -114,7 +130,6 @@ public class ArrivalActivity extends Activity {
 			if(sum != 0)
 				contents.put(kind, sum);
 		}
-		System.out.println(contents);
 		return contents;
 	}
 

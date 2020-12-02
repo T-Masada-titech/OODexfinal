@@ -6,11 +6,11 @@ public class Stock implements Comparable<Stock>{
 		this.kind = kind;
 	}
 
-	public String kind() {
+	public String getKind() {
 		return kind;
 	}
 
 	public int compareTo(Stock s) {
-		return this.kind.compareTo(s.kind());
+		return this.kind.compareTo(s.getKind());
 	}
 }
