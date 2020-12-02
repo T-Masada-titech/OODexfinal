@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.Scanner;
 
 import data.Contents;
-import data.MyCalendar;
 import data.ReservationData;
 import data.StockData;
 
@@ -45,15 +44,9 @@ public class ArrivalActivity extends Activity {
 
 	private Contents getAndPrintReservationContentsNextDay() {
 		System.out.println("次営業日の日にちを入力してください。");
-		System.out.println("年:");
-		int year = scan.nextInt();
-		System.out.println("月:");
-		int month = scan.nextInt();
-		System.out.println("日:");
-		int date = scan.nextInt();
-		MyCalendar cal = new MyCalendar(year, month, date);
+		String date = scan.next();
 		System.out.println(date + "分の予約の注文内容の総計は");
-		Contents contents = rd.getReservationContentsFromDate(cal);
+		Contents contents = rd.getReservationContentsFromDate(date);
 		System.out.println(contents);
 		return contents;
 	}

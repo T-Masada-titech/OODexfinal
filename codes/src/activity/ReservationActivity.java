@@ -3,7 +3,6 @@ package activity;
 import java.util.Scanner;
 
 import data.Contents;
-import data.MyCalendar;
 import data.ReservationData;
 import data.StockData;
 
@@ -40,15 +39,9 @@ public class ReservationActivity extends Activity {
 		System.out.println("お客様の電話番号を入力してください");
 		String call = scan.next();
 		System.out.println("予約日を入力してください");
-		System.out.println("年:");
-		int year = scan.nextInt();
-		System.out.println("月:");
-		int month = scan.nextInt();
-		System.out.println("日:");
-		int date = scan.nextInt();
-		MyCalendar cal = new MyCalendar(year, month, date);
+		String date = scan.next();
 		int id = rd.createReservationID();
-		rd.addReservation(id, name, call, cal, this.order);
+		rd.addReservation(id, name, call, date, this.order);
 		System.out.println("予約IDは " + id + " です");
 		System.out.println("予約作成処理が完了しました\n");
 	}
